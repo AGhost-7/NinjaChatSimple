@@ -1,0 +1,13 @@
+@()
+
+@main("Ninja Chat") {
+	<div class="container">
+	
+		<h1>Hello <span id="name-span">newcomer!</span></h1>
+		<div id="chat-out">
+		</div>
+		<textarea class="form-control" id="chat-in"></textarea>
+		<script src='@routes.Assets.at("javascripts/chat.js")'></script>
+	</div>
+	
+}
