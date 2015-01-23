@@ -16,8 +16,6 @@ import org.mindrot.jbcrypt.BCrypt
 
 import models._
 
-
-
 object Users extends Controller with MongoController {
 	
 	import models.Implicits._
@@ -47,7 +45,14 @@ object Users extends Controller with MongoController {
 					for {
 						user <- User.insert(name, password)
 						token <- Token.generate(user)
-					} yield Ok(Json.toJson(token))
+					} yield {
+						//Application.channel push 
+						//val login = Json.toJson(LoginBroadcast(user.name, false))
+						val login = Json.obj("notification" ->
+								s"User ${user.name}  has just joined the conversation.")
+						Application.channel push(login)
+						Ok(Json.toJson(token))
+					}
 					
 				} { user =>
 					// Send a 409 error... I think its appropriate for a duplicate error.
@@ -72,6 +77,9 @@ object Users extends Controller with MongoController {
 					// Name exists and passord is correct, just need to give this guy his
 					// token now.
 					Token.generate(user).map { token =>
+						val login = Json.obj("notification" ->
+								s"User ${user.name} has just joined the conversation.")
+						Application.channel push(login)
 						Ok(Json.toJson(token))
 					}
 				} else {
@@ -91,6 +99,9 @@ object Users extends Controller with MongoController {
 				
 				Future.successful(Unauthorized(Json.obj("message" -> message)))
 			} { user =>
+				val notif = Json.obj("notification" -> 
+						s"User ${user.name} has just left the conversation.")
+				Application.channel push(notif)
 				// So, got some work to do. For now this will remove all tokens tied to
 				// user. Not sure how to do bulk removal, although there seems to be
 				// a bulk insert.

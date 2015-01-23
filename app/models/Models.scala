@@ -22,7 +22,7 @@ object Token {
 	/**
 	 * JSON formatter
 	 */
-	implicit val tokenFormat = Json.format[Token]
+	implicit val jsonFormat = Json.format[Token]
 	
 	/**
 	 * Returns the MongoDB collection object corresponding the the Token class
@@ -57,7 +57,7 @@ object User {
 	/**
 	 * JSON formatter
 	 */
-	implicit val userFormat = Json.format[User]
+	implicit val jsonFormat = Json.format[User]
 
 	/**
 	 * Returns an option of string, where the Some instance contains the 
@@ -147,8 +147,8 @@ case class ServerBroadcast(name: String, content: String)
  * Json serializers all in one import.
  */
 package object Implicits {
-	implicit def userFormat = User.userFormat
-	implicit def tokenFormat = Token.tokenFormat
+	implicit def userFormat = User.jsonFormat
+	implicit def tokenFormat = Token.jsonFormat
 	implicit val userMessageFormat = Json.format[UserMessage]
 	implicit val serverBroadcastFormat = Json.format[ServerBroadcast]
 }

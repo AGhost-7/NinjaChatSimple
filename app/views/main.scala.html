@@ -5,7 +5,7 @@
 <html>
 	<head>
 		<title>@title</title>
-		<link rel="shortcut icon" type="image/png" href="@routes.Assets.at("images/favicon.png")">
+		<link rel="shortcut icon" type="image/png" href='@routes.Assets.at("images/favicon.png")'>
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
@@ -15,8 +15,25 @@
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/backbone.js/1.1.2/backbone-min.js"></script>*@
 		
 		<style>
-		.btn-bottom-nav {
+		#nav-ok-btn {
 			margin-top: 24px;
+		}
+		html {
+			position: relative;
+			/* stretch page so that the footer
+			is always at bottom */
+			min-height: 100%;
+		}
+		.footer {
+			/* Otherwise bottom is useless... */
+			position: absolute;
+			bottom: 0;
+			width: 100%;
+			text-align: center;
+			padding-top:9px;
+			background-color: rgb(248, 248, 248);;
+			margin-bottom: 0px;
+			/*color: #90BFD4;*/
 		}
 		</style>
 	</head>
@@ -60,7 +77,7 @@
 								<input type="password" id="nav-in-pw" class="form-control"/>
 							</div>
 							<div class="col-sm-1">
-								<button class="btn btn-default btn-bottom-nav" id="nav-ok-btn">Ok</button>
+								<button class="btn btn-default" id="nav-ok-btn">Ok</button>
 							</div>
 						</div>
 						
@@ -76,9 +93,17 @@
 		</div>
 		<![endif]-->
 		
-		<script async src="@routes.Assets.at("javascripts/login.js")"></script>
+		<script src='@routes.Assets.at("javascripts/login.js")'></script>
 		
 		@content
+		
+		
+			<footer class="footer">
+					<p class="small">
+						<a href="https://github.com/AGhost-7/NinjaChat">Website Sources</a> - 
+						<a href="https://twitter.com/JonathanBoudre2">Follow me @@JonathanBoudre2</a>
+					</p>
+			</footer>
 		
 	</body>
 </html>

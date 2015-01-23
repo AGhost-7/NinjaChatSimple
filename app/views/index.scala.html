@@ -1,11 +1,47 @@
 @()
 
 @main("Ninja Chat") {
+	<style>
+	#chat-out { 
+		overflow-x: auto;
+	}
+	
+	.chat-error, .server-msg { font-weight: 600; }
+	.chat-error { color: red; }
+	.server-msg { color: #57BD7E; }
+	/*redundant, but at least it works...*/
+	@@media(min-height: 400px) {
+		#chat-out { height: 190px; }
+	}
+	@@media(min-height: 500px) {
+		#chat-out { height: 240px; }
+	}
+	@@media(min-height: 600px) {
+		#chat-out { height: 340px; }
+	}
+	@@media(min-height: 700px) {
+		#chat-out { height: 440px; }
+	}
+	@@media(min-height: 800px) {
+		#chat-out { height: 540px; }
+	}
+	@@media(min-height: 900px) {
+		#chat-out { height: 640px; }
+	}
+	@@media(min-height: 1000px) {
+		#chat-out { height: 740px; }
+	}
+	@@media(min-height: 1100px) {
+		#chat-out { height: 840px; }
+	}
+	
+	</style>
 	<div class="container">
 	
 		<h1>Hello <span id="name-span">newcomer!</span></h1>
-		<div id="chat-out">
-		</div>
+		
+		<div class="well" id="chat-out" ></div>
+		
 		<textarea class="form-control" id="chat-in"></textarea>
 		<script src='@routes.Assets.at("javascripts/chat.js")'></script>
 	</div>
