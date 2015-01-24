@@ -61,14 +61,6 @@ $ () ->
 		
 		$out.appendWithScrolling(html)
 		
-		###
-		isScrolledToBottom = $out[0].scrollHeight - $out[0].clientHeight <= $out[0].scrollTop + 1
-		
-		$out.append(html)
-		
-		if isScrolledToBottom
-			$out[0].scrollTop = $out[0].scrollHeight - $out[0].clientHeight
-		###
 		
 	sock.onopen = (e) ->
 		console.log('Socket connected!')
